@@ -104,12 +104,14 @@ public class Heap<E extends Comparable<? super E>> {
 
     private static <E> void siftDown(E e, int size, Object[] elems) {
         int index = 0;
+        // set the first element with the last position value.
         elems[index] = e;
 
         // index starts with 0
         // when size == 1, <= (size - 2) / 2, is not the same as (<= size/2 - 1) === ( < size / 2 )
         int half = size >>> 1;
 
+        // from top to down
         while (index < half) {
             int leftChild = index * 2 + 1;
             int rightChild = leftChild + 1;
@@ -125,18 +127,20 @@ public class Heap<E extends Comparable<? super E>> {
                 break;
             } else {
                 // has two children
-                Comparable<? super E> firstValue = (Comparable<? super E>) elems[leftChild];
+                Comparable<? super E> leftValue = (Comparable<? super E>) elems[leftChild];
 
                 // current value is the least
                 if (value.compareTo((E) elems[leftChild]) < 0 && value.compareTo((E) elems[rightChild]) < 0) {
                     break;
                 }
 
-                if (firstValue.compareTo((E) elems[rightChild]) < 0) {
-                    elems[index] = firstValue;
+                // left child is the least
+                if (leftValue.compareTo((E) elems[rightChild]) < 0) {
+                    elems[index] = leftValue;
                     elems[leftChild] = value;
                     index = leftChild;
                 } else {
+                    // right child is the least
                     elems[index] = elems[rightChild];
                     elems[rightChild] = value;
                     index = rightChild;
