@@ -1,0 +1,9 @@
+package com.xliu.cs.ds;
+
+/**
+ * 单链表
+ */
+public class SingleLinkedList {
+
+
+}
