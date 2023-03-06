@@ -1,13 +1,13 @@
-package com.xliu.cs.algs.index;
+package com.xliu.cs.ds.index;
 
 /**
- * 生产级别的Bloom Filter，参考Google guava的Bloom Filter
+ * 生产级别的Bloom Filter，参考 Google guava的 Bloom Filter
  */
 public class BloomFilter {
     /** Hash函数的个数 */
-    private int k;
+    private final int k;
     /** Hash函数的个数 */
-    private int bitsPerKey;
+    private final int bitsPerKey;
     /** bit的总长度 */
     private int bitLen;
     /** Bloom filter的结果数据 */
@@ -21,8 +21,8 @@ public class BloomFilter {
     private static int hash(byte[] key) {
         if (key == null) { return 0; }
         int h = 1;
-        for (int i = 0; i < key.length; i++) {
-            h = (h << 5) + h + key[i];
+        for (byte b : key) {
+            h = (h << 5) + h + b;
         }
         return h;
     }

@@ -88,7 +88,7 @@ public class ConsistentHash {
                 add(new FNV1_32_Hash());
                 add(new MurMurHashV2());
                 add(new KetamaHash());
-                add(new NativeHash());
+                add(new JavaHash());
             }
         };
 

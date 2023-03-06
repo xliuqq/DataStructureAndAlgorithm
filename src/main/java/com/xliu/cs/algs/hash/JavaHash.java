@@ -3,7 +3,7 @@ package com.xliu.cs.algs.hash;
 /**
  * Java 默认的Hash算法，其不适用于一致性Hash中的Hash算法。
  */
-public class NativeHash implements Hash {
+public class JavaHash implements Hash {
     @Override
     public int hash(byte[] bytes, int offset, int len) {
         if (bytes == null) { return 0; }
