@@ -1,5 +1,6 @@
-package com.xliu.cs.ds.tree;
+package com.xliu.cs.ds.array;
 
+import com.xliu.cs.ds.array.UnionSet;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

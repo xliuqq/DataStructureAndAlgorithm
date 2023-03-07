@@ -1,7 +1,11 @@
-package com.xliu.cs.ds;
+package com.xliu.cs.ds.array;
 
 /**
- * 树状数组
+ * 树状数组，支持两种操作：
+ * - add(n, v): 第 n 个位置加上值 v
+ * - sum(n, m): [n, m]区段求和
+ *
+ * 复杂度未O(log(n))。
  * @formatter:off
  *                 c4
  *            /    |
@@ -14,7 +18,7 @@ package com.xliu.cs.ds;
  */
 public class TreeArray {
 
-    private int[] data;
+    private final int[] data;
 
     public TreeArray(int nums) {
         data = new int[nums];
@@ -60,15 +64,4 @@ public class TreeArray {
         return sum;
     }
 
-    public static void main(String[] args) {
-        int nums = 10;
-        TreeArray treeArray = new TreeArray(nums);
-        for (int i = 1; i <= nums; i++) {
-            treeArray.add(i, i);
-        }
-        // 需要开启 -ea ，启动断言
-        assert treeArray.sum(1, 5) == 15;
-        assert treeArray.sum(1, 10) == 55;
-        assert treeArray.sum(3, 6) == 18;
-    }
 }
