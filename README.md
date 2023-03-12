@@ -6,10 +6,11 @@
 ## 数据结构 
 > 详细内容可见 [知识空间](https://xliuqq.github.io/blog_md/code_guide/data_structure/array.html)
 
-- [最小堆](src/main/java/com/xliu/cs/ds/Heap.java)
-- [并查集](src/main/java/com/xliu/cs/ds/tree/UnionSet.java)
+- [最小堆](src/main/java/com/xliu/cs/ds/array/Heap.java)
+- [并查集](src/main/java/com/xliu/cs/ds/array/UnionSet.java)
 - [布隆过滤器](src/main/java/com/xliu/cs/ds/index/BloomFilter.java)
-- [树状数组](src/main/java/com/xliu/cs/ds/tree/TreeArray.java)
+- [树状数组](src/main/java/com/xliu/cs/ds/array/TreeArray.java)
+- [线段树](src/main/java/com/xliu/cs/ds/tree/SegmentTree.java)
 
 ## 算法
 > 详细内容可见 [知识空间](https://xliuqq.github.io/blog_md/code_guide/algs/common.html)
@@ -28,4 +29,5 @@
 
 ## 示例
 
-[字母排列（欧拉通路+并查集）](src/main/java/com/xliu/cs/example/WordHeadTail.java)
+- [TopK频繁元素(堆排序)](src/main/java/com/xliu/cs/example/TopKFrequent.java)
+- [字母排列（欧拉通路+并查集）](src/main/java/com/xliu/cs/example/WordHeadTail.java)
