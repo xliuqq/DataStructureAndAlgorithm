@@ -16,10 +16,8 @@ class UnionSetTest {
         unionSet.union(2, 1);
         unionSet.union(3, 0);
 
-
         unionSet.union(7, 9);
         unionSet.union(6, 8);
-
 
         assertTrue(unionSet.isSameSet(0, 5));
         assertEquals(4, unionSet.countSet());

@@ -11,11 +11,11 @@ public class BloomFilter {
     /**
      * Hash函数的个数，根据 bitLen 和插入次数计算
      */
-    private int k;
+    private final int k;
     /**
      * Bloom filter的结果数据
      */
-    private long[] result;
+    private final long[] result;
 
     public BloomFilter(int expectInsertions) {
         this(expectInsertions, 0.03);

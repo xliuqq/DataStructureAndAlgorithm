@@ -12,15 +12,10 @@ public class UnionSet {
      * 2）值 < 0，表示该集合对应的树的节点的个数。
      * 初始值为-1，表示每个节点都是个单独的集合（树且层数为1）
      */
-    private int[] ids;
-    /**
-     * 节点个数
-     */
-    private int size;
+    private final int[] ids;
 
     public UnionSet(int size) {
-        this.size = size;
-        ids = new int[this.size];
+        ids = new int[size];
         Arrays.fill(ids, -1); // use -1 to represent its parent is itself
     }
 
@@ -44,7 +39,7 @@ public class UnionSet {
         return find(i) == find(j);
     }
 
-    private int find(int index) {
+    public int find(int index) {
         if (index < 0) {
             throw new IllegalArgumentException("input parameter should not be negative.");
         }
@@ -72,6 +67,7 @@ public class UnionSet {
         }
         return count;
     }
+
 
     public int getSetSize(int i) {
         return -ids[find(i)];

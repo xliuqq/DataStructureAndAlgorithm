@@ -1,4 +1,4 @@
-package com.xliu.cs.ds;
+package com.xliu.cs.ds.array;
 
 import java.util.Arrays;
 

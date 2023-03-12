@@ -1,5 +1,6 @@
-package com.xliu.cs.ds;
+package com.xliu.cs.ds.array;
 
+import com.xliu.cs.ds.array.Heap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
