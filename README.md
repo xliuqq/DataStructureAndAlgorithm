@@ -26,6 +26,7 @@
 
 - [二分搜索及其变种](src/main/java/com/xliu/cs/algs/utils/BinarySearch.java)
 
+- [Fibonacci矩阵计算](src/main/java/com/xliu/cs/algs/math/Fibonacci.java)
 数学（math)：
 - [均匀洗牌](src/main/java/com/xliu/cs/algs/math/Shuffle.java)
 - [完美洗牌](src/main/java/com/xliu/cs/algs/math/PerfectShuffle.java)
