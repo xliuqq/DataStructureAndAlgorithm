@@ -11,6 +11,8 @@
 - [布隆过滤器](src/main/java/com/xliu/cs/ds/index/BloomFilter.java)
 - [树状数组](src/main/java/com/xliu/cs/ds/array/TreeArray.java)
 - [线段树](src/main/java/com/xliu/cs/ds/tree/SegmentTree.java)
+- [单链表](src/main/java/com/xliu/cs/ds/linkedlist/SingleLinkedList.java)
+
 
 ## 算法
 > 详细内容可见 [知识空间](https://xliuqq.github.io/blog_md/code_guide/algs/common.html)
@@ -20,7 +22,9 @@
   - JavaHash, Crc32Hash, FNV1_32_Hash, FNV1A_32_Hash, KetemaHash, MurMurHashV2
 
 - [二叉树遍历](src/main/java/com/xliu/cs/algs/tree/TraverseTree.java)
+- [二叉树叶节点间最长距离和树高度](src/main/java/com/xliu/cs/algs/tree/MaxPathBetweenLeaf.java)
 
+- [二分搜索及其变种](src/main/java/com/xliu/cs/algs/utils/BinarySearch.java)
 
 数学（math)：
 - [均匀洗牌](src/main/java/com/xliu/cs/algs/math/Shuffle.java)
