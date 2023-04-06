@@ -73,7 +73,12 @@ class TraverseTreeTest {
 
     @Test
     void postOrder() {
-       // TODO(lzq) add test
+        BinaryTreeNode<Integer> root = TreeTestUtils.buildBinaryTree(14);
+
+        List<Integer> orders = new ArrayList<>();
+        TraverseTree.postOrder(root, orders);
+
+        Assertions.assertEquals("[7, 8, 3, 9, 10, 4, 1, 11, 12, 5, 13, 6, 2, 0]", orders.toString());
     }
 
     @Test

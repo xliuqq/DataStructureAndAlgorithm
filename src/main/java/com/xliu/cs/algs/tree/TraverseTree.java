@@ -96,6 +96,19 @@ public class TraverseTree {
         }
     }
 
+
+    private static class Frame<E> {
+        int pc;
+        BinaryTreeNode<E> node;
+        List<E> store;
+
+        public Frame(BinaryTreeNode<E> node, List<E> store) {
+            this.pc = 0;
+            this.node = node;
+            this.store = store;
+        }
+    }
+
     /**
      * 中序遍历，左 -> 根 -> 右
      *
@@ -106,24 +119,36 @@ public class TraverseTree {
         if (root == null) {
             return;
         }
+        Deque<Frame<E>> stack = new LinkedList<>();
+        stack.add(new Frame<>(root, store));
 
-        // 保存栈帧，当前栈帧只需要 node
-        Deque<BinaryTreeNode<E>> stack = new LinkedList<>();
+        while (!stack.isEmpty()) {
+            Frame<E> current = stack.getLast();
 
-        BinaryTreeNode<E> current  = root;
-
-        while (current != null || !stack.isEmpty()) {
-            // 左子树进栈，因此会先遍历左子树 <=> inOrderRecursive(current.left))
-            while (current != null) {
-                stack.push(current);
-                current = current.getLeft();
+            switch (current.pc) {
+                case 0:
+                    if (current.node == null) {
+                        stack.removeLast();
+                    }
+                    break;
+                case 1:
+                    if (current.node.getLeft() != null) {
+                        stack.add(new Frame<>(current.node.getLeft(), store));
+                    }
+                    break;
+                case 2:
+                    store.add(current.node.getVal());
+                    break;
+                case 3:
+                    if (current.node.getRight() != null) {
+                        stack.add(new Frame<>(current.node.getRight(), store));
+                    }
+                    break;
+                case 4:
+                    stack.removeLast();
+                    break;
             }
-            // 没有栈帧，即current节点的左子树递归完成，存储值
-            current = stack.pop();
-            store.add(current.getVal());
-
-            // 右节点加入栈帧，进入递归
-            current = current.getRight();
+            current.pc += 1;
         }
     }
 
@@ -155,8 +180,43 @@ public class TraverseTree {
      * @param store 存储遍历的顺序
      */
     public static <E> void postOrder(BinaryTreeNode<E> root, List<E> store) {
-        // TODO(lzq) 递归变循环的方法
+        if (root == null) {
+            return;
+        }
 
+        // 保存栈帧，当前栈帧只需要 node
+        Deque<Frame<E>> stack = new LinkedList<>();
+
+        stack.add(new Frame<>(root, store));
+
+        while (!stack.isEmpty()) {
+            Frame<E> current = stack.getLast();
+
+            switch (current.pc) {
+                case 0:
+                    if (current.node == null) {
+                        stack.removeLast();
+                    }
+                    break;
+                case 1:
+                    if (current.node.getLeft() != null) {
+                        stack.add(new Frame<>(current.node.getLeft(), store));
+                    }
+                    break;
+                case 2:
+                    if (current.node.getRight() != null) {
+                        stack.add(new Frame<>(current.node.getRight(), store));
+                    }
+                    break;
+                case 3:
+                    store.add(current.node.getVal());
+                    break;
+                case 4:
+                    stack.removeLast();
+                    break;
+            }
+            current.pc += 1;
+        }
     }
 
 

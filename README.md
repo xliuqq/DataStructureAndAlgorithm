@@ -46,6 +46,9 @@
 - [点在三角形内](src/main/java/com/xliu/cs/algs/math/PointInTriangle.java)
 - [N个小矩阵构成大矩阵](src/main/java/com/xliu/cs/algs/math/PerfectRectangle.java)
 
+递归
+- [递归变循环通用方法](src/main/java/com/xliu/cs/algs/recursive/RecursiveToFor.java)
+
 ## 示例
 
 - [TopK频繁元素(堆排序)](src/main/java/com/xliu/cs/example/TopKFrequent.java)
