@@ -1,4 +1,4 @@
-package com.xliu.cs.example;
+package com.xliu.cs.leetcode;
 
 import java.util.HashSet;
 import java.util.LinkedList;

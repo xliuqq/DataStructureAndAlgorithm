@@ -1,6 +1,6 @@
-package com.xliu.cs.example.recusive;
+package com.xliu.cs.leetcode.recusive;
 
-import com.xliu.cs.example.ArrayRestore;
+import com.xliu.cs.leetcode.ArrayRestore;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
