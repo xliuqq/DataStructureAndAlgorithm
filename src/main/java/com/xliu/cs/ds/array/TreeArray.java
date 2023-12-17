@@ -1,5 +1,7 @@
 package com.xliu.cs.ds.array;
 
+import com.xliu.cs.generate.ClassNote;
+
 /**
  * 树状数组，支持两种操作：
  * - add(n, v): 第 n 个位置加上值 v
@@ -16,6 +18,7 @@ package com.xliu.cs.ds.array;
  * 001  010  011  100
  * @formatter:on
  */
+@ClassNote("树状数组")
 public class TreeArray {
 
     private final int[] data;

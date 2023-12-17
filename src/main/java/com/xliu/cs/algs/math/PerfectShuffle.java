@@ -1,5 +1,8 @@
 package com.xliu.cs.algs.math;
 
+import com.xliu.cs.generate.ClassNote;
+
+@ClassNote("完美洗牌")
 public class PerfectShuffle {
     /**
      * 有个长度为2n的数组{a1,a2,a3,…,an,b1,b2,b3,…,bn}，希望排序后{b1, a1, b2, a2,…., bn, an}，请考虑有无时间复杂度O(n)，空间复杂度O(1)的解法.

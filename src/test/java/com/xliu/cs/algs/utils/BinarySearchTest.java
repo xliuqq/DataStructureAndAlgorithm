@@ -1,5 +1,6 @@
 package com.xliu.cs.algs.utils;
 
+import com.xliu.cs.algs.search.BinarySearch;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

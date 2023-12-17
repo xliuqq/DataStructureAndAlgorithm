@@ -1,10 +1,13 @@
 package com.xliu.cs.ds.array;
 
+import com.xliu.cs.generate.ClassNote;
+
 import java.util.Arrays;
 
 /**
- * 并查集
+ * 并查集用于快速判断两个元素是否在一个集合中。
  */
+@ClassNote("并查集")
 public class UnionSet {
     /**
      * 元素，下标为元素索引，值分为两种情况：

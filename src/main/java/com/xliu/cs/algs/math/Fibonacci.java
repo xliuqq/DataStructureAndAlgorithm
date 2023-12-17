@@ -1,5 +1,7 @@
 package com.xliu.cs.algs.math;
 
+import com.xliu.cs.generate.ClassNote;
+
 /**
  * Fibonacci Recursion
  * F(n) = F(n-1) + F(n-2)
@@ -9,6 +11,7 @@ package com.xliu.cs.algs.math;
  * A ^ n 可以用n的二进制表示，通过A的2^i次方幂相乘形式
  * A ^ 9 = (A ^ 8) * A, 9 = 1001
  */
+@ClassNote("斐波那契数列（矩阵方式）")
 public class Fibonacci {
     public static int getNElem(int n) {
         if (n <= 2) return 1;

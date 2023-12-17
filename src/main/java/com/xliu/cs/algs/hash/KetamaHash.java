@@ -1,5 +1,7 @@
 package com.xliu.cs.algs.hash;
 
+import com.xliu.cs.generate.ClassNote;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -8,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
  * <p>
  * md5的长度，默认为128bit，16 byte.
  */
+@ClassNote("KetamaHash")
 public class KetamaHash implements Hash {
 
     @Override

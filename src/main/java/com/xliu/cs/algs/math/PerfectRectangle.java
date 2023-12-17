@@ -3,6 +3,7 @@ package com.xliu.cs.algs.math;
 import java.util.*;
 
 import com.xliu.cs.ds.Point;
+import com.xliu.cs.generate.ClassNote;
 
 /**
  * Given N axis-aligned rectangles where N > 0, determine if they all together form an exact cover of a rectangular region.
@@ -16,6 +17,7 @@ import com.xliu.cs.ds.Point;
  * 2）是大矩阵边上点，出现0次或两次；
  * 3）是大矩阵内部点，出现0次或4次；
  */
+@ClassNote("N个小矩阵构成大矩阵")
 public class PerfectRectangle {
 
     public static boolean isRectangleCover(int[][] rectangles) {

@@ -3,10 +3,12 @@ package com.xliu.cs.algs.math;
 
 import com.xliu.cs.algs.utils.MathUtil;
 import com.xliu.cs.ds.Point;
+import com.xliu.cs.generate.ClassNote;
 
 /**
  * Judge Point in Triangle or not
  */
+@ClassNote("点在三角形内")
 public class PointInTriangle {
 
     /**

@@ -1,9 +1,12 @@
 package com.xliu.cs.algs.hash;
 
 
+import com.xliu.cs.generate.ClassNote;
+
 /**
  * Fowler_Noll_Vo_hash 1A
  */
+@ClassNote("FNV1A_32_Hash")
 public class FNV1A_32_Hash implements Hash {
 
     private static final long FNV_32_INIT = 2166136261L;

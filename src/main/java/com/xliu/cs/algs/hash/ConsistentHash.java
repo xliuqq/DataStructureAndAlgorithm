@@ -1,8 +1,11 @@
 package com.xliu.cs.algs.hash;
 
+import com.xliu.cs.generate.ClassNote;
+
 import java.util.*;
 
 // 分布式一致性 Hash 算法，解决"单调性“问题，防止缓存节点新增/减少时的雪崩问题。
+@ClassNote("一致性 Hash")
 public class ConsistentHash {
 
     //虚拟节点

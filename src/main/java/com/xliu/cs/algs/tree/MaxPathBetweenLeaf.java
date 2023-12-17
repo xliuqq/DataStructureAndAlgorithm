@@ -1,6 +1,7 @@
 package com.xliu.cs.algs.tree;
 
 import com.xliu.cs.ds.tree.BinaryTreeNode;
+import com.xliu.cs.generate.ClassNote;
 
 /**
  * 树中两个根节点的最长路径(长度定义为路径上的边的个数)，动态规划 / 递归算法
@@ -8,6 +9,7 @@ import com.xliu.cs.ds.tree.BinaryTreeNode;
  * let S(x) = Depth(x.left) + Depth(x.right)
  * F(root) = Max(S(x)) for all x in root tree
  */
+@ClassNote("二叉树叶节点间最长距离和树高度")
 public class MaxPathBetweenLeaf{
     private int currentMax = 0;
 

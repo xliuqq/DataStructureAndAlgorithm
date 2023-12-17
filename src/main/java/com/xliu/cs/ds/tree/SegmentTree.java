@@ -1,9 +1,12 @@
 package com.xliu.cs.ds.tree;
 
+import com.xliu.cs.generate.ClassNote;
+
 /**
  * 维护区间信息（要求满足结合律）。与树状数组相比，它可以实现 Olg(n) 的区间修改，还可以同时支持多种操作（加、乘)，更具通用性。
  * 平衡二叉树
  */
+@ClassNote("线段树")
 public class SegmentTree {
 
     private static class SegmentNode extends BinaryTreeNode<Integer> {

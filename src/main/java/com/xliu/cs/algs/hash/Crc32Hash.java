@@ -1,10 +1,13 @@
 package com.xliu.cs.algs.hash;
 
+import com.xliu.cs.generate.ClassNote;
+
 import java.util.zip.CRC32;
 
 /**
  * CRC全称为 Cyclic Redundancy Check，又叫循环冗余校验。CRC是目前使用中最老的一种校验算法。
  */
+@ClassNote("Crc32Hash")
 public class Crc32Hash implements Hash {
     @Override
     public int hash(byte[] bytes, int offset, int len) {

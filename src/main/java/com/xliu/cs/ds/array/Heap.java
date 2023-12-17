@@ -1,11 +1,14 @@
 package com.xliu.cs.ds.array;
 
+import com.xliu.cs.generate.ClassNote;
+
 import java.util.Arrays;
 
 /**
  * 堆的实现, the head is the min value。
  * Java中堆的实现为 {@link java.util.PriorityQueue}
  */
+@ClassNote("最小堆")
 @SuppressWarnings("unchecked")
 public class Heap<E extends Comparable<? super E>> {
 

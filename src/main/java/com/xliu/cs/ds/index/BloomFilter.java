@@ -1,8 +1,11 @@
 package com.xliu.cs.ds.index;
 
+import com.xliu.cs.generate.ClassNote;
+
 /**
  * 生产级别的Bloom Filter，参考 Google guava的 Bloom Filter
  */
+@ClassNote("布隆过滤器")
 public class BloomFilter {
     /**
      * bit的总长度，根据 fpp 和插入次数计算

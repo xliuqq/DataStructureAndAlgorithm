@@ -11,5 +11,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.PACKAGE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PkgNote {
+    // title, name
     String value();
+    // markdown format
+    String description();
 }

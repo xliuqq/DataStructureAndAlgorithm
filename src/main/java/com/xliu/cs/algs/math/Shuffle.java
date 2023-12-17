@@ -1,5 +1,7 @@
 package com.xliu.cs.algs.math;
 
+import com.xliu.cs.generate.ClassNote;
+
 import java.util.Random;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Random;
  * 随机洗牌算法 Fisher-Yates shuffle.
  * Shuffle an array of n elements, the probability of each element appearing at each position is the same.
  */
+@ClassNote("均匀洗牌")
 public class Shuffle {
 
     private static final Random RANDOM = new Random();

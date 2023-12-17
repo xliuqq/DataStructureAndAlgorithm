@@ -1,8 +1,11 @@
 package com.xliu.cs.ds.linkedlist;
 
+import com.xliu.cs.generate.ClassNote;
+
 /**
  * 单链表
  */
+@ClassNote("单向链表")
 public class SingleLinkedList<T> {
     private SingleNode<T> first;
     private SingleNode<T> last;

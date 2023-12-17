@@ -1,10 +1,14 @@
 package com.xliu.cs.algs.recursive;
 
+import com.xliu.cs.generate.ClassNote;
+import com.xliu.cs.generate.MethodNote;
+
 import java.util.*;
 
 /**
  * 使用栈替代递归函数。
  */
+@ClassNote("递归变循环通用方法")
 public class RecursiveToFor {
 
 
@@ -37,6 +41,7 @@ public class RecursiveToFor {
         }
     }
 
+    @MethodNote("汉诺塔非递归实现")
     public static List<String> hanioNonRecursive(int n, char from, char via, char to) {
         Deque<Frame> stack = new ArrayDeque<>();
 

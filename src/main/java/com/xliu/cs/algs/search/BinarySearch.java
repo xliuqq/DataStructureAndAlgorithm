@@ -1,5 +1,8 @@
-package com.xliu.cs.algs.utils;
+package com.xliu.cs.algs.search;
 
+import com.xliu.cs.generate.ClassNote;
+
+@ClassNote("二分搜索及其变种")
 public class BinarySearch {
 
     /** 返回等于value的下标，如果不存在，则返回插入该值的（下标+1）的负数*/

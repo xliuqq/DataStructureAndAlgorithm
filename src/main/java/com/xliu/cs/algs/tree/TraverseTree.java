@@ -1,6 +1,7 @@
 package com.xliu.cs.algs.tree;
 
 import com.xliu.cs.ds.tree.BinaryTreeNode;
+import com.xliu.cs.generate.ClassNote;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -10,6 +11,7 @@ import java.util.Queue;
 /**
  * 树的遍历，包括前序、中序、后续遍历。
  */
+@ClassNote("二叉树遍历")
 public class TraverseTree {
 
     /**

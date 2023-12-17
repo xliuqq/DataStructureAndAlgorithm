@@ -1,15 +1,23 @@
 package com.xliu.cs.generate;
 
-import java.io.File;
-import java.io.IOException;
+import lombok.extern.log4j.Log4j2;
+
+import java.io.*;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.*;
 
+@Log4j2
 public class Main {
 
-    static class PkgAndClass {
-        Class pkgInfoClass;
+    private static class PkgAndClasses {
+        String pkgName;
         List<String> classes = new ArrayList<>();
+
+        int getLevel() {
+            // com.xliu.cs
+            return pkgName.split("\\.").length - 3;
+        }
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -23,42 +31,85 @@ public class Main {
             }
         }
         // 获取所有的 package-info，获取其包名，和包下的所有类
-        Map<String, List<String>> pkgClasses = groupByPackage(classes);
-        for (Map.Entry<String, List<String>> pkgClass : pkgClasses.entrySet()) {
-            handlePkg(pkgClass.getKey());
-            handleClasses(pkgClass.getValue());
-            System.out.println(pkgClass);
+        SortedMap<String, PkgAndClasses> pkgClasses = groupByPackage(classes);
+
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("README.md")))) {
+            writer.write("# 数据结构与算法\n\n");
+            for (Map.Entry<String, PkgAndClasses> pkgClass : pkgClasses.entrySet()) {
+                handlePkg(pkgClass.getValue(), writer);
+                handleClasses(pkgClass.getValue(), writer);
+            }
         }
     }
 
-    private static Map<String, PkgAndClass> groupByPackage(List<String> classes) {
-        Map<String, PkgAndClass> pkgClasses = new HashMap<>();
+    private static SortedMap<String, PkgAndClasses> groupByPackage(List<String> classes) {
+        SortedMap<String, PkgAndClasses> pkgClasses = new TreeMap<>();
         for (String clazz : classes) {
-            String pkg = clazz.split("\\.")[0];
+            // 获取包名
+            int index = clazz.lastIndexOf(".");
+            String pkg;
+            if (index != -1) {
+                // 忽略包注释文件，会单独处理
+                if ("package-info".equals(clazz.substring(index))) {
+                    continue;
+                }
+                pkg = clazz.substring(0, index);
+            } else {
+                pkg = "";
+            }
             pkgClasses.compute(pkg, (k, v) -> {
                 if (v == null) {
-                    v = new PkgAndClass();
+                    v = new PkgAndClasses();
                 }
-//                v.pkgInfoClass;
+                v.pkgName = pkg;
+                v.classes.add(clazz);
+
                 return v;
             });
         }
         return pkgClasses;
     }
 
-    private static void handlePkg(String pkg) {
+    private static void handlePkg(PkgAndClasses pkgAndClasses, Writer writer) throws IOException {
+        String pkg = pkgAndClasses.pkgName;
+        String pkgClass = String.format("%s.package-info", pkg);
+        try {
+            Class<?> aClass = Class.forName(pkgClass);
+            PkgNote pkgNote = aClass.getAnnotation(PkgNote.class);
+            // TODO 根据包的路径支持多级标题
 
+            writer.write(String.format("#%s %s\n", "#".repeat(pkgAndClasses.getLevel()), pkgNote.value()));
+            writer.write(pkgNote.description() + "\n\n");
+        } catch (ClassNotFoundException e) {
+            // ignore not found
+            log.error("package [{}] has no pkg annotation.", pkg);
+        }
     }
 
-    private static void handleClasses(List<String> classes) throws ClassNotFoundException {
-        for (String clazz : classes) {
+    private static void handleClasses(PkgAndClasses pkgAndClasses, Writer writer) throws IOException {
+        for (String clazz : pkgAndClasses.classes) {
             // 根据名称加载类
-            Class<?> aClass = Class.forName(clazz);
+            Class<?> aClass = null;
+            try {
+                aClass = Class.forName(clazz);
+            } catch (ClassNotFoundException e) {
+                log.error("class [{}] is not exist", clazz);
+                continue;
+            }
 
-            PkgNote classNote = aClass.getAnnotation(PkgNote.class);
-
-            if (classNote != null) {
-                System.out.println(aClass.getName() + ":" + classNote.value());
+            ClassNote classNote = aClass.getAnnotation(ClassNote.class);
+            if (classNote == null) {
+                log.error("class [{}] has no class annotation.", clazz);
+                continue;
+            }
+            writer.write(String.format("[%s](%s)\n\n", classNote.value(), "src/main/java/" + aClass.getName().replace(".", "/") + ".java"));
+            for (Method method : aClass.getMethods()) {
+                MethodNote methodNote = method.getAnnotation(MethodNote.class);
+                if (methodNote == null) {
+                    log.error("method [{}] has no class annotation.", method.getName());
+                    continue;
+                }
+                writer.write(String.format("- %s\n\n", methodNote.value()));
             }
         }
 
