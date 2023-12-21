@@ -1,11 +1,14 @@
 package com.xliu.cs.ds;
 
+import com.xliu.cs.generate.IgnoreNote;
+
 import java.util.Objects;
 
 /**
  * 二维平面的点的数据结构。
  * 不可变数据结构。
  */
+@IgnoreNote
 public class Point<T> {
     public final T x;
     public final T y;

@@ -11,7 +11,8 @@ public class SingleLinkedList<T> {
     private SingleNode<T> last;
     private int size;
 
-    public SingleLinkedList(){}
+    public SingleLinkedList() {
+    }
 
     public void addLast(T value) {
         final SingleNode<T> newNode = new SingleNode<>(value);
@@ -32,7 +33,7 @@ public class SingleLinkedList<T> {
             newNode.next = first;
         }
         first = newNode;
-        size ++;
+        size++;
     }
 
     public int size() {
@@ -45,7 +46,7 @@ public class SingleLinkedList<T> {
         }
         SingleNode<T> tmp = first;
         first = first.next;
-        size --;
+        size--;
 
         return tmp.val;
     }
@@ -64,6 +65,23 @@ public class SingleLinkedList<T> {
             sb.append(", more [...] ");
         }
         return sb.toString();
+    }
+
+    /**
+     * 单链表节点
+     */
+    static class SingleNode<T> {
+        public final T val;
+        public SingleNode<T> next;
+
+        public SingleNode(T x) {
+            val = x;
+        }
+
+        public SingleNode(T x, SingleNode n) {
+            val = x;
+            next = n;
+        }
     }
 
 }

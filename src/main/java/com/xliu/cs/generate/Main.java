@@ -10,6 +10,8 @@ import java.util.*;
 @Log4j2
 public class Main {
 
+    private static final Set<String> skipPkgs = Collections.singleton("com.xliu.cs.generate");
+
     private static class PkgAndClasses {
         String pkgName;
         List<String> classes = new ArrayList<>();
@@ -20,7 +22,7 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException {
         String pkgPrefix = "com/xliu/cs";
         Enumeration<URL> dirs = Thread.currentThread().getContextClassLoader().getResources(pkgPrefix);
         List<String> classes = new ArrayList<>();
@@ -49,20 +51,26 @@ public class Main {
             int index = clazz.lastIndexOf(".");
             String pkg;
             if (index != -1) {
-                // 忽略包注释文件，会单独处理
-                if ("package-info".equals(clazz.substring(index))) {
-                    continue;
-                }
                 pkg = clazz.substring(0, index);
             } else {
+                // 不存在包名
                 pkg = "";
             }
+
+            // 过滤掉不需要匹配的包名
+            if (skipPkgs.contains(pkg)) {
+                continue;
+            }
+
             pkgClasses.compute(pkg, (k, v) -> {
                 if (v == null) {
                     v = new PkgAndClasses();
                 }
                 v.pkgName = pkg;
-                v.classes.add(clazz);
+                // 忽略包名类的类注解
+                if (!clazz.endsWith(".package-info")) {
+                    v.classes.add(clazz);
+                }
 
                 return v;
             });
@@ -76,8 +84,14 @@ public class Main {
         try {
             Class<?> aClass = Class.forName(pkgClass);
             PkgNote pkgNote = aClass.getAnnotation(PkgNote.class);
-            // TODO 根据包的路径支持多级标题
 
+            if (pkgNote == null) {
+                if (aClass.getAnnotation(IgnoreNote.class) == null) {
+                    log.error("package [{}] has no pkg annotation.", pkg);
+                }
+                return;
+            }
+            log.debug("handle pkg [{}]", aClass.getPackage().getName());
             writer.write(String.format("#%s %s\n", "#".repeat(pkgAndClasses.getLevel()), pkgNote.value()));
             writer.write(pkgNote.description() + "\n\n");
         } catch (ClassNotFoundException e) {
@@ -99,14 +113,17 @@ public class Main {
 
             ClassNote classNote = aClass.getAnnotation(ClassNote.class);
             if (classNote == null) {
-                log.error("class [{}] has no class annotation.", clazz);
+                // 忽略内部类和显式标记不需要注解的类
+                if (!aClass.getName().contains("$") && aClass.getAnnotation(IgnoreNote.class) == null) {
+                    log.error("class [{}] has no class annotation.", clazz);
+                }
                 continue;
             }
             writer.write(String.format("[%s](%s)\n\n", classNote.value(), "src/main/java/" + aClass.getName().replace(".", "/") + ".java"));
             for (Method method : aClass.getMethods()) {
                 MethodNote methodNote = method.getAnnotation(MethodNote.class);
                 if (methodNote == null) {
-                    log.error("method [{}] has no class annotation.", method.getName());
+//                    log.error("method [{}] has no method annotation.", method.getName());
                     continue;
                 }
                 writer.write(String.format("- %s\n\n", methodNote.value()));

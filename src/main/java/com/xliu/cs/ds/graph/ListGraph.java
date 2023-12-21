@@ -1,5 +1,8 @@
 package com.xliu.cs.ds.graph;
 
+import com.xliu.cs.generate.ClassNote;
+
+@ClassNote("数组加链表表示图")
 public class ListGraph {
     private final int numVertices;
     private final EdgeList[] edges;
@@ -9,22 +12,46 @@ public class ListGraph {
         this.edges = edges;
     }
 
+    public static ListGraph newListGraph(int numVertices, String[] edgeStr) {
+        ListGraph.EdgeList[] edges= new ListGraph.EdgeList[numVertices];
+        for (String s : edgeStr) {
+            String[] part = s.split(" ");
+            int from = Integer.parseInt(part[0]);
+            int to = Integer.parseInt(part[1]);
+
+            if (edges[from] == null) {
+                edges[from] = new EdgeList(new EdgeInfo(from, to), null);
+            } else {
+                edges[from].next = new EdgeList(new EdgeInfo(from, to), edges[from].next);
+            }
+            if (edges[to] == null) {
+                edges[to] = new EdgeList(new EdgeInfo(to, from), null);
+            } else {
+                edges[to].next = new EdgeList(new EdgeInfo(to, from), edges[to].next);
+            }
+        }
+        return new ListGraph(numVertices, edges);
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Vertices: ").append(numVertices).append("\n");
         for (int i = 0; i < numVertices; i++) {
             EdgeList head = edges[i];
             while (head != null) {
-                sb.append(i).append("->").append(head.info.to).append(":").append(head.info.val).append("\n");
+                sb.append(i).append("->").append(head.info.to).append(":").append(head.info.val).append(",");
                 head = head.next;
             }
+            sb.append("\n");
         }
         return sb.toString();
     }
 
     public static class EdgeList {
-        public final EdgeInfo info;
-        public final EdgeList next;
+        // 边的信息
+        public EdgeInfo info;
+        // from 顶点的边信息
+        public EdgeList next;
 
         public EdgeList(EdgeInfo i, EdgeList n) {
             info = i;

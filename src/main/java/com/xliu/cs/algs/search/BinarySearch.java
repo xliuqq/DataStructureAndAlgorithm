@@ -1,11 +1,13 @@
 package com.xliu.cs.algs.search;
 
 import com.xliu.cs.generate.ClassNote;
+import com.xliu.cs.generate.MethodNote;
 
 @ClassNote("二分搜索及其变种")
 public class BinarySearch {
 
     /** 返回等于value的下标，如果不存在，则返回插入该值的（下标+1）的负数*/
+    @MethodNote("搜索等于value的下标，如果不存在，则返回插入该值的（下标+1）的负数")
     public static int search(int[] data, int value) {
         int low = 0;
         int high = data.length - 1;
@@ -24,6 +26,7 @@ public class BinarySearch {
     }
 
     /** 搜索等于 value 值的元素中最小的下标，没有相等元素，则返回 -1 */
+    @MethodNote("搜索等于 value 值的元素中最小的下标，没有相等元素，则返回 -1")
     public static int minEqualBS (int[] data, int value) {
         int low = 0;
         int high = data.length - 1;
@@ -46,6 +49,7 @@ public class BinarySearch {
     }
 
     /** 搜索等于 value 值的元素中最大的下标，没有相等元素，则返回 -1 */
+    @MethodNote("搜索等于 value 值的元素中最大的下标，没有相等元素，则返回 -1")
     public static int maxEqualBS (int[] data, int value) {
         int low = 0;
         int high = data.length - 1;
@@ -66,7 +70,8 @@ public class BinarySearch {
         return -1; // not found
     }
 
-    /** 搜索 < value 值的元素中最大的下标，没有相等元素，则返回 -1 */
+    /** 搜索 < value 值的元素中最大的下标，没有比它小的则返回 -1 */
+    @MethodNote("搜索 < value 值的元素中最大的下标，没有比它小的则返回 -1")
     public static int maxLessBS (int[] data, int value) {
         int low = 0;
         int high = data.length - 1;
@@ -82,7 +87,8 @@ public class BinarySearch {
         return -1; // not found
     }
 
-    /** 搜索 > value 值的元素中最小的下标，没有相等元素，则返回 -1 */
+    /** 搜索 > value 值的元素中最小的下标，没有比它大的则返回 -1 */
+    @MethodNote("搜索 > value 值的元素中最小的下标，没有比它大的则返回 -1")
     public static int minGreaterBS (int[] data, int value) {
         int low = 0;
         int high = data.length - 1;

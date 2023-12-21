@@ -1,5 +1,7 @@
 package com.xliu.cs.leetcode.greedy;
 
+import com.xliu.cs.generate.ClassNote;
+
 import java.util.Scanner;
 
 /**
@@ -10,6 +12,7 @@ import java.util.Scanner;
  * 选择任意两个相邻的数，然后从序列移除这两个数，并用这两个数字的和插入到这两个数之前的位置(只插入一个和)。
  * 现在对于所给序列要求出最少需要多少次操作可以将其变成回文序列。
  */
+@ClassNote("变成回文序列")
 public class SumHuiWen {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);

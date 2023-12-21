@@ -1,10 +1,13 @@
 package com.xliu.cs.algs.divideconquer;
 
+import com.xliu.cs.generate.ClassNote;
+
 import java.util.*;
 
 /**
  * Given an array A, return the Top K Max Elements in it.
  */
+@ClassNote("数组里的最大的K个数（无序）")
 public class KMaxElement {
 
     public static List<Integer> getKMax(List<Integer> nums, int k) {

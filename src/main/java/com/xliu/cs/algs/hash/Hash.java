@@ -1,8 +1,11 @@
 package com.xliu.cs.algs.hash;
 
+import com.xliu.cs.generate.IgnoreNote;
+
 /***
  * hash 基类
  */
+@IgnoreNote
 public interface Hash {
 
     int hash(byte[] bytes, int offset, int len);

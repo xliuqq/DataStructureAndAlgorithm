@@ -1,17 +1,22 @@
 package com.xliu.cs.leetcode.divideconquer;
 
+import com.xliu.cs.generate.ClassNote;
+import com.xliu.cs.generate.MethodNote;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Given an array of size n, find the majority element.
  */
+@ClassNote("数组里的大多数元素")
 public class MajorityElement {
     /**
      * Given an array of size n, find the majority element. The majority element is the element that appears
      * more than ⌊ n/2 ⌋ times.
      * major表示该数，遇到相等cnt++，遇到不等cnt--(等价于从数组中消除两个不同的数，原来超过n/2的数还超过n/2)
      */
+    @MethodNote("超过1/2的元素")
     public static int halfElement(int[] nums) {
         int len = nums.length;
         int cnt = 0;
@@ -40,6 +45,7 @@ public class MajorityElement {
      * more than ⌊ n/3 ⌋ times.
      * a, b 表示可能的最多元素，消除元素时，a和b的计数器同时减1(消除三个不同的数，超过n/3的元素还是超过n/3)
      */
+    @MethodNote("超过1/3的元素")
     public static List<Integer> oneThirdElement(int[] nums) {
         int a = 0, b = 0, aCnt = 0, bCnt = 0;
 
@@ -71,15 +77,6 @@ public class MajorityElement {
             res.add(b);
         }
         return res;
-    }
-
-    public static void main(String[] args) {
-        int[] elems = {1, 1, 2, 3, 1};
-        List<Integer> res = MajorityElement.oneThirdElement(elems);
-
-        for (Integer integer : res) {
-            System.out.print(integer + " ");
-        }
     }
 
 }

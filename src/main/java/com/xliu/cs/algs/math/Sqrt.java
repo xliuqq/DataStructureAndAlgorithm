@@ -1,9 +1,14 @@
 package com.xliu.cs.algs.math;
 
+import com.xliu.cs.generate.ClassNote;
+import com.xliu.cs.generate.MethodNote;
+
+@ClassNote("平方根计算方法")
 public class Sqrt {
     /**
      * 牛顿公式计算平方根
      */
+    @MethodNote("牛顿公式计算平方根")
     public static int newTonSqrt(int x) {
         if (x <= 0) return 0;
         long r = x;
@@ -15,6 +20,7 @@ public class Sqrt {
     /**
      * 平方根倒数速算法
      */
+    @MethodNote("平方根倒数速算法")
     public static int fastSqrt(int num) {
         float xHalf = 0.5F * num;
         int temp = Float.floatToRawIntBits(num);

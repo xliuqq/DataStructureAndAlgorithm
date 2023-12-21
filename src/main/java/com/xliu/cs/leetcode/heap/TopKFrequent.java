@@ -1,5 +1,7 @@
 package com.xliu.cs.leetcode.heap;
 
+import com.xliu.cs.generate.ClassNote;
+
 import java.util.*;
 
 /**
@@ -15,6 +17,7 @@ import java.util.*;
  *      same count, return smaller value;
  *      return result no order;
  * */
+@ClassNote("频率最高的K个元素")
 public class TopKFrequent {
     public List<Integer> topKFrequent(int[] nums, int k) {
 

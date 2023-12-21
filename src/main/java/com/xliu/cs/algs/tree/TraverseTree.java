@@ -2,6 +2,7 @@ package com.xliu.cs.algs.tree;
 
 import com.xliu.cs.ds.tree.BinaryTreeNode;
 import com.xliu.cs.generate.ClassNote;
+import com.xliu.cs.generate.MethodNote;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -20,6 +21,7 @@ public class TraverseTree {
      * @param root  根节点
      * @param store 存储遍历的顺序
      */
+    @MethodNote("层次遍历")
     public static <E> void levelOrder(BinaryTreeNode<E> root, List<E> store) {
         if (root == null) {
             return;
@@ -51,6 +53,7 @@ public class TraverseTree {
      * @param root  根节点
      * @param store 存储遍历的顺序
      */
+    @MethodNote("前序遍历（非递归）")
     public static <E> void preOrder(BinaryTreeNode<E> root, List<E> store) {
         if (root == null) {
             return;
@@ -84,6 +87,7 @@ public class TraverseTree {
      * @param root  根节点
      * @param store 存储遍历的顺序
      */
+    @MethodNote("前序遍历（递归）")
     public static <E> void preOrderRecursive(BinaryTreeNode<E> root, List<E> store) {
         if (root == null) {
             return;
@@ -97,7 +101,6 @@ public class TraverseTree {
             preOrderRecursive(root.getRight(), store);
         }
     }
-
 
     private static class Frame<E> {
         int pc;
@@ -117,6 +120,7 @@ public class TraverseTree {
      * @param root  根节点
      * @param store 存储遍历的顺序
      */
+    @MethodNote("中序遍历（非递归）")
     public static <E> void inOrder(BinaryTreeNode<E> root, List<E> store) {
         if (root == null) {
             return;
@@ -160,6 +164,7 @@ public class TraverseTree {
      * @param root  根节点
      * @param store 存储遍历的顺序
      */
+    @MethodNote("中序遍历（递归）")
     public static <E> void inOrderRecursive(BinaryTreeNode<E> root, List<E> store) {
         if (root == null) {
             return;
@@ -181,6 +186,7 @@ public class TraverseTree {
      * @param root  根节点
      * @param store 存储遍历的顺序
      */
+    @MethodNote("后序遍历（非递归）")
     public static <E> void postOrder(BinaryTreeNode<E> root, List<E> store) {
         if (root == null) {
             return;
@@ -228,6 +234,7 @@ public class TraverseTree {
      * @param root  根节点
      * @param store 存储遍历的顺序
      */
+    @MethodNote("后序遍历（递归）")
     public static <E> void postOrderRecursive(BinaryTreeNode<E> root, List<E> store) {
         if (root == null) {
             return;

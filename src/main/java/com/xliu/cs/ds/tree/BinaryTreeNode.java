@@ -1,10 +1,13 @@
 package com.xliu.cs.ds.tree;
 
+import com.xliu.cs.generate.ClassNote;
+import com.xliu.cs.generate.MethodNote;
 import lombok.Data;
 
 import java.util.Objects;
 
 @Data
+@ClassNote("二叉树")
 public class BinaryTreeNode<E> {
     private BinaryTreeNode<E> left;
     private BinaryTreeNode<E> right;

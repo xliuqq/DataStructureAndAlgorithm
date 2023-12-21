@@ -36,6 +36,7 @@ class BinarySearchTest {
         int[] data = {1, 3, 4, 4, 10, 12, 18, 38, 38};
         assertEquals(-1, BinarySearch.maxLessBS(data, 0));
         assertEquals(1, BinarySearch.maxLessBS(data, 4));
+        assertEquals(5, BinarySearch.maxLessBS(data, 13));
         assertEquals(6, BinarySearch.maxLessBS(data, 38));
     }
 
