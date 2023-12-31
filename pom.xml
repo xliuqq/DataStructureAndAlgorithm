@@ -12,7 +12,20 @@
         <jdk.version>11</jdk.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>xliuqq-gitee</id>
+            <url>https://gitee.com/luckyQQQ/maven-repository/raw/main</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+        <dependency>
+            <groupId>org.xliu.cs.projects</groupId>
+            <artifactId>annotations-for-doc</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
