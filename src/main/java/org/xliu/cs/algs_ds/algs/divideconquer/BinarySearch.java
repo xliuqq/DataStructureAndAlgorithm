@@ -1,4 +1,4 @@
-package org.xliu.cs.algs_ds.algs.search;
+package org.xliu.cs.algs_ds.algs.divideconquer;
 
 import org.xliu.cs.projects.anno_for_doc.annotations.ClassNote;
 import org.xliu.cs.projects.anno_for_doc.annotations.MethodNote;

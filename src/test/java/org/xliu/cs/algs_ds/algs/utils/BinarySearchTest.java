@@ -1,6 +1,6 @@
 package org.xliu.cs.algs_ds.algs.utils;
 
-import org.xliu.cs.algs_ds.algs.search.BinarySearch;
+import org.xliu.cs.algs_ds.algs.divideconquer.BinarySearch;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

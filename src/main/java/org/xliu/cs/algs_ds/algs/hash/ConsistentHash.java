@@ -75,7 +75,7 @@ public class ConsistentHash {
 
     public static void main(String[] args) {
         // 物理节点
-        Set<String> physicalNodes = new TreeSet<>() {
+        Set<String> physicalNodes = new TreeSet<String>() {
             {
                 add("192.168.1.101");
                 add("192.168.1.102");
@@ -84,7 +84,7 @@ public class ConsistentHash {
             }
         };
 
-        List<Hash> hashes = new ArrayList<>(6) {
+        List<Hash> hashes = new ArrayList<Hash>(6) {
             {
                 add(new Crc32Hash());
                 add(new FNV1A_32_Hash());
