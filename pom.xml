@@ -28,8 +28,14 @@
         </dependency>
 
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.28</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.xliu.cs.projects</groupId>
-            <artifactId>annotations-for-doc</artifactId>
+            <artifactId>annotations-for-doc-core</artifactId>
             <version>1.0.1</version>
         </dependency>
     </dependencies>

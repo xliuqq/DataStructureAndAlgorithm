@@ -11,12 +11,24 @@
 
 [计算数字中 1 bit 的个数](src/main/java/org/xliu/cs/algs_ds/algs/bit/CountBits.java)
 
-- 减一相与法，循环次数等于1出现的次数
-
 - 右移法，循环次数等于最高位1的位置
+
+- 减一相与法，循环次数等于1出现的次数
 
 ### 减而治之
 
+
+[二分搜索及其变种](src/main/java/org/xliu/cs/algs_ds/algs/divideconquer/BinarySearch.java)
+
+- 搜索等于 value 值的元素中最大的下标，没有相等元素，则返回 -1
+
+- 搜索 < value 值的元素中最大的下标，没有比它小的则返回 -1
+
+- 搜索等于 value 值的元素中最小的下标，没有相等元素，则返回 -1
+
+- 搜索 > value 值的元素中最小的下标，没有比它大的则返回 -1
+
+- 搜索等于value的下标，如果不存在，则返回插入该值的（下标+1）的负数
 
 [数组里的最大的K个数（无序）](src/main/java/org/xliu/cs/algs_ds/algs/divideconquer/KMaxElement.java)
 
@@ -53,9 +65,9 @@
 
 [点在三角形内](src/main/java/org/xliu/cs/algs_ds/algs/math/PointInTriangle.java)
 
-- 通过面积判断
-
 - 通过叉积判断
+
+- 通过面积判断
 
 [均匀洗牌](src/main/java/org/xliu/cs/algs_ds/algs/math/Shuffle.java)
 
@@ -68,6 +80,8 @@
 ### 递归
 
 
+[N个字母的所有的排列组合](src/main/java/org/xliu/cs/algs_ds/algs/recursive/Permutation.java)
+
 [递归变循环通用方法](src/main/java/org/xliu/cs/algs_ds/algs/recursive/RecursiveToFor.java)
 
 - 汉诺塔非递归实现
@@ -75,17 +89,11 @@
 ### 搜索（search）
 
 
-[二分搜索及其变种](src/main/java/org/xliu/cs/algs_ds/algs/search/BinarySearch.java)
+[24点可行解搜索](src/main/java/org/xliu/cs/algs_ds/algs/search/Card24Points.java)
 
-- 搜索等于value的下标，如果不存在，则返回插入该值的（下标+1）的负数
+- 动态规划解决24点的问题
 
-- 搜索等于 value 值的元素中最小的下标，没有相等元素，则返回 -1
-
-- 搜索等于 value 值的元素中最大的下标，没有相等元素，则返回 -1
-
-- 搜索 < value 值的元素中最大的下标，没有比它小的则返回 -1
-
-- 搜索 > value 值的元素中最小的下标，没有比它大的则返回 -1
+[1-n的乱序数组前缀反转使其有序的最大次数](src/main/java/org/xliu/cs/algs_ds/algs/search/PrefixReverseSort.java)
 
 ### 树（tree）
 
@@ -98,19 +106,19 @@
 
 [二叉树遍历](src/main/java/org/xliu/cs/algs_ds/algs/tree/TraverseTree.java)
 
-- 前序遍历（非递归）
-
-- 层次遍历
+- 中序遍历（非递归）
 
 - 中序遍历（递归）
 
-- 中序遍历（非递归）
+- 层次遍历
 
-- 前序遍历（递归）
+- 后序遍历（非递归）
 
 - 后序遍历（递归）
 
-- 后序遍历（非递归）
+- 前序遍历（非递归）
+
+- 前序遍历（递归）
 
 ## 性能测试
 
@@ -163,9 +171,9 @@
 
 [出现次数不一样的数](src/main/java/org/xliu/cs/algs_ds/leetcode/bit/SingleNumber.java)
 
-- 只有一个元素出现一次，其它都出现两次
-
 - 只有一个元素出现一次，其它都出现三次
+
+- 只有一个元素出现一次，其它都出现两次
 
 - 只有两个元素出现一次，其它都出现两次
 
