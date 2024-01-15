@@ -10,7 +10,7 @@
 
     <properties>
         <jdk.version>8</jdk.version>
-        <xliu.annotation.version>1.0.2</xliu.annotation.version>
+        <xliu.annotation.version>1.0.3</xliu.annotation.version>
     </properties>
 
     <repositories>
@@ -19,6 +19,12 @@
             <url>https://gitee.com/luckyQQQ/maven-repository/raw/main</url>
         </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>xliuqq-gitee</id>
+            <url>https://gitee.com/luckyQQQ/maven-repository/raw/main</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
         <dependency>
