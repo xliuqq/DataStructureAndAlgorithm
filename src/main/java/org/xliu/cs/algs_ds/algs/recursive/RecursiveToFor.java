@@ -11,20 +11,6 @@ import java.util.*;
 @ClassNote("递归变循环通用方法")
 public class RecursiveToFor {
 
-
-    public static List<String> hanio(int n, char from, char via, char to) {
-        if (n == 1) {
-            return Collections.singletonList(String.format("%c-%c", from, to));
-        }
-        ArrayList<String> result = new ArrayList<>();
-        result.addAll(hanio(n - 1, from, to, via));
-        result.addAll(hanio(1, from, via, to));
-        result.addAll(hanio(n - 1, via, from, to));
-
-        return result;
-    }
-
-
     private static class Frame {
         // 程序计数器，从0开始，遇到一次递归需要加一
         int pc;
@@ -41,6 +27,19 @@ public class RecursiveToFor {
         }
     }
 
+    public static List<String> hanio(int n, char from, char via, char to) {
+        if (n == 1) {
+            return Collections.singletonList(String.format("%c-%c", from, to));
+        }
+        ArrayList<String> result = new ArrayList<>();
+        result.addAll(hanio(n - 1, from, to, via));
+        result.addAll(hanio(1, from, via, to));
+        result.addAll(hanio(n - 1, via, from, to));
+
+        return result;
+    }
+
+
     @MethodNote("汉诺塔非递归实现")
     public static List<String> hanioNonRecursive(int n, char from, char via, char to) {
         Deque<Frame> stack = new ArrayDeque<>();
@@ -49,13 +48,17 @@ public class RecursiveToFor {
 
         List<String> orders = new ArrayList<>();
 
+        // stack is not empty
         while (!stack.isEmpty()) {
+            // take the last stack
             Frame current = stack.getLast();
 
             switch (current.pc) {
                 case 0:
                     if (current.n == 1) {
                         orders.add(String.format("%c-%c", current.from, current.to));
+                        // simple return, or can goto(4)
+                        // current.pc = 4
                         stack.removeLast();
                     }
                     break;
@@ -74,7 +77,11 @@ public class RecursiveToFor {
                 case 4:
                     stack.removeLast();
                     break;
+                default:
+                    throw new RuntimeException("wrong execute");
             }
+
+            // pc increment 1
             current.pc += 1;
         }
 
