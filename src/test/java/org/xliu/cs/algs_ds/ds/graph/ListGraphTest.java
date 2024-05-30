@@ -1,16 +1,24 @@
 package org.xliu.cs.algs_ds.ds.graph;
 
 import org.junit.jupiter.api.Test;
-import org.xliu.cs.algs_ds.ds.graph.ListGraph;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ListGraphTest {
 
     @Test
     public void testListGraph() {
-        int numVertices = 6;
         String[] edgeStr = "0 1;1 2;2 3;4 5;1 4".split(";");
 
-        ListGraph graph = ListGraph.newListGraph(numVertices, edgeStr);
+        Graph<Void> graph = ListGraph.newListGraph(edgeStr);
+
+        assertEquals(6, graph.getVertexNums());
+
+        AtomicInteger count = new AtomicInteger();
+        graph.getEdges().forEachRemaining(e -> count.getAndIncrement());
+        assertEquals(5, count.get());
 
         System.out.println(graph);
 

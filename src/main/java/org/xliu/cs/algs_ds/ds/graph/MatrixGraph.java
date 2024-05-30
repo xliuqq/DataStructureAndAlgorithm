@@ -2,6 +2,8 @@ package org.xliu.cs.algs_ds.ds.graph;
 
 import org.xliu.cs.projects.anno_for_doc.annotations.ClassNote;
 
+import java.util.Map;
+
 /**
  * 矩阵表示图（稠密图）
  */

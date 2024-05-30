@@ -1,0 +1,117 @@
+package org.xliu.cs.algs_ds.algs.graph;
+
+import org.junit.jupiter.api.Test;
+import org.xliu.cs.algs_ds.ds.graph.Graph;
+import org.xliu.cs.algs_ds.ds.graph.ListGraph;
+
+import java.sql.Array;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class GraphOpTest {
+
+    @Test
+    void bfs() {
+
+        String[] edgeStr = "0 1;1 2;2 3;4 5;1 4".split(";");
+        Graph<Void> graph = ListGraph.newListGraph(edgeStr);
+
+        GraphOp<Void> op = new GraphOp<>(graph);
+
+        op.bfs(0, v -> {
+            System.out.println(v.getId());
+            return null;
+        });
+    }
+    @Test
+    void dfs() {
+        //0:null,->1;
+        //1:null,->2;->4;
+        //2:null,->3;
+        //3:null,
+        //4:null,->5;
+        //5:null,
+        String[] edgeStr = "0 1;1 2;2 3;4 5;1 4;6 7".split(";");
+        Graph<Void> graph = ListGraph.newListGraph(edgeStr);
+
+        GraphOp<Void> op = new GraphOp<>(graph);
+
+        ArrayList<Long> actual = new ArrayList<>();
+
+        op.dfs(0, v -> {
+            actual.add(v.getId());
+            return null;
+        });
+
+        assertArrayEquals(new Long[]{3L, 2L, 5L, 4L, 1L, 0L}, actual.toArray(new Long[0]));
+
+        ArrayList<Long> actualA = new ArrayList<>();
+
+        op.dfs(v -> {
+            actualA.add(v.getId());
+            return null;
+        });
+        assertArrayEquals(new Long[]{3L, 2L, 5L, 4L, 1L, 0L, 7L, 6L}, actualA.toArray(new Long[0]));
+    }
+
+    @Test
+    void topologyByKahn() {
+        String[] edgeStr = "0 1;1 2;2 3;4 5;3 2;5 0".split(";");
+        Graph<Void> graph = ListGraph.newListGraph(edgeStr);
+
+        GraphOp<Void> op = new GraphOp<>(graph);
+
+        ArrayList<Long> orders = new ArrayList<>();
+
+        assertEquals(true, op.topologyByKahn(orders));
+    }
+
+
+    @Test
+    void topologyByKahnWithoutRing() {
+        String[] edgeStr = "0 1;1 2;2 3;4 5;1 4;6 7".split(";");
+        Graph<Void> graph = ListGraph.newListGraph(edgeStr);
+
+        GraphOp<Void> op = new GraphOp<>(graph);
+
+        ArrayList<Long> orders = new ArrayList<>();
+
+        assertEquals(false, op.topologyByKahn(orders));
+    }
+
+
+    @Test
+    void topologyByDfsWithoutRing() {
+        String[] edgeStr = "0 1;1 2;2 3;4 5;1 4;6 7".split(";");
+        Graph<Void> graph = ListGraph.newListGraph(edgeStr);
+
+        GraphOp<Void> op = new GraphOp<>(graph);
+
+        ArrayList<Long> orders = new ArrayList<>();
+
+        op.topologyByDfs(orders);
+        assertEquals(graph.getVertexNums(), orders.size());
+
+        System.out.println(orders);
+    }
+
+
+    @Test
+    void topologyByDFS() {
+        // 4 -> 5 -> 0 -> 1 -> 2 ->3 -> 2
+        String[] edgeStr = "0 1;1 2;2 3;4 5;3 2;5 0".split(";");
+        Graph<Void> graph = ListGraph.newListGraph(edgeStr);
+
+        GraphOp<Void> op = new GraphOp<>(graph);
+
+        ArrayList<Long> orders = new ArrayList<>();
+
+        op.topologyByDfs(orders);
+        System.out.println(orders);
+
+        assertEquals(graph.getVertexNums(), orders.size());
+
+    }
+
+}
