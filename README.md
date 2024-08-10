@@ -37,6 +37,25 @@
 
 [最长增长子序列](src/main/java/org/xliu/cs/algs_ds/algs/dp/LongestIncreasingSubSequence.java)
 
+### 图算法
+
+
+[图操作类](src/main/java/org/xliu/cs/algs_ds/algs/graph/GraphOp.java)
+
+- 有向图广度遍历
+
+- 有向图从特定点广度遍历
+
+- 有向图从特定点深度遍历
+
+- 有向图深度遍历
+
+- 获取每个顶点的入度
+
+- 拓扑序（有向图）: DFS，无法判断是否有环
+
+- 拓扑序（有向图）: Kahn算法，可以判断是否有环，类似于广度遍历
+
 ### 哈希（hash）
 
 
@@ -93,6 +112,8 @@
 
 - 动态规划解决24点的问题
 
+[倒水问题：给定三个分别是3L,5L,8L的桶，其中8L的桶装满水，如何倒水生成两个4L的水桶？](src/main/java/org/xliu/cs/algs_ds/algs/search/PourWater.java)
+
 [1-n的乱序数组前缀反转使其有序的最大次数](src/main/java/org/xliu/cs/algs_ds/algs/search/PrefixReverseSort.java)
 
 ### 树（tree）
@@ -142,7 +163,11 @@
 ### 图
 
 
-[数组加链表表示图](src/main/java/org/xliu/cs/algs_ds/ds/graph/ListGraph.java)
+[图抽象类](src/main/java/org/xliu/cs/algs_ds/ds/graph/Graph.java)
+
+[数组加链表表示无向图](src/main/java/org/xliu/cs/algs_ds/ds/graph/ListGraph.java)
+
+- 从边创建图（有向图），顶点和图都没有属性
 
 [矩阵表示图（稠密图）](src/main/java/org/xliu/cs/algs_ds/ds/graph/MatrixGraph.java)
 
