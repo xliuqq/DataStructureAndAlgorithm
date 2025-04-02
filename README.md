@@ -45,21 +45,27 @@
 ### 图算法
 
 
-[图操作类](src/main/java/org/xliu/cs/algs_ds/algs/graph/GraphOp.java)
+[图遍历顺序算法](src/main/java/org/xliu/cs/algs_ds/algs/graph/GraphOp.java)
 
 - 有向图广度遍历
 
 - 有向图从特定点广度遍历
 
-- 有向图从特定点深度遍历
-
 - 有向图深度遍历
+
+- 有向图从特定点深度遍历
 
 - 获取每个顶点的入度
 
 - 拓扑序（有向图）: DFS，无法判断是否有环
 
 - 拓扑序（有向图）: Kahn算法，可以判断是否有环，类似于广度遍历
+
+[最小生成树算法：在一个加权无向图中找到一个边的子集，使得这个子集构成的树包含图中的所有顶点，并且边的权重之和最小](src/main/java/org/xliu/cs/algs_ds/algs/graph/MinimalSpanningTree.java)
+
+- Kruskal贪心算法：按照边的权重顺序（从小到大）选择边，每次选择权重最小的边加入生成树中，如果加入这条边不会形成环，则这条边是最小生成树的一部分。时间复杂度为O(MlogM)，其中M是图中边的数量
+
+- Prim贪心算法：从图中的某一顶点开始，逐渐长出一棵包含所有顶点的最小生成树。每一步都添加一条连接已选顶点集合和未选顶点集合的最小边。时间复杂度为O(N^2)，其中N是图中顶点的数量。
 
 ### 哈希（hash）
 
@@ -77,6 +83,11 @@
 [KetamaHash](src/main/java/org/xliu/cs/algs_ds/algs/hash/KetamaHash.java)
 
 [MurMurHashV2](src/main/java/org/xliu/cs/algs_ds/algs/hash/MurMurHashV2.java)
+
+### 索引
+
+
+[布隆过滤器](src/main/java/org/xliu/cs/algs_ds/algs/index/BloomFilter.java)
 
 ### 数学（math）
 
@@ -172,14 +183,11 @@
 
 [数组加链表表示无向图](src/main/java/org/xliu/cs/algs_ds/ds/graph/ListGraph.java)
 
-- 从边创建图（有向图），顶点和图都没有属性
+- 从边创建图（有向图），顶点和边都没有属性
+
+- 从边创建图（有向图），顶点没有属性，边有长度属性
 
 [矩阵表示图（稠密图）](src/main/java/org/xliu/cs/algs_ds/ds/graph/MatrixGraph.java)
-
-### 索引
-
-
-[布隆过滤器](src/main/java/org/xliu/cs/algs_ds/ds/index/BloomFilter.java)
 
 ### 链表
 

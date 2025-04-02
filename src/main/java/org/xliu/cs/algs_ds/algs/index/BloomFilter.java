@@ -1,4 +1,4 @@
-package org.xliu.cs.algs_ds.ds.index;
+package org.xliu.cs.algs_ds.algs.index;
 
 import org.xliu.cs.projects.anno_for_doc.annotations.ClassNote;
 

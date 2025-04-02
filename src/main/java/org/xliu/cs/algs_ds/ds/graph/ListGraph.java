@@ -10,12 +10,12 @@ import java.util.Map;
 import java.util.stream.StreamSupport;
 
 @ClassNote("数组加链表表示无向图")
-public class ListGraph<T> implements Graph<T> {
+public class ListGraph<T, E> implements Graph<T, E> {
     private final int numVertices;
-    private final Map<Long, EdgeList> edges;
+    private final Map<Long, EdgeList<E>> edges;
     private final Map<Long, Vertex<T>> vertexes;
 
-    public ListGraph(Map<Long, EdgeList> edges, Map<Long, Vertex<T>> vertexes) {
+    public ListGraph(Map<Long, EdgeList<E>> edges, Map<Long, Vertex<T>> vertexes) {
         numVertices = vertexes.size();
         this.edges = edges;
         this.vertexes = vertexes;
@@ -24,7 +24,7 @@ public class ListGraph<T> implements Graph<T> {
     @Override
     @SuppressWarnings("unchecked")
     public Vertex<T>[] getNeighbours(long vertexId) {
-        EdgeList edgeList = edges.get(vertexId);
+        EdgeList<E> edgeList = edges.get(vertexId);
         if (edgeList == null) {
             return new Vertex[0];
         }
@@ -52,11 +52,11 @@ public class ListGraph<T> implements Graph<T> {
     }
 
     @Override
-    public Iterator<Edge> getEdges() {
+    public Iterator<Edge<E>> getEdges() {
         return edges.values().stream().flatMap(
                 edgeList -> {
-                    Iterator<Edge> iterator = new Iterator<Edge>() {
-                        private EdgeList current = edgeList;
+                    Iterator<Edge<E>> iterator = new Iterator<Edge<E>>() {
+                        private EdgeList<E> current = edgeList;
 
                         @Override
                         public boolean hasNext() {
@@ -64,20 +64,39 @@ public class ListGraph<T> implements Graph<T> {
                         }
 
                         @Override
-                        public Edge next() {
-                            Edge edge = current.info;
+                        public Edge<E> next() {
+                            Edge<E> edge = current.info;
                             current = current.next;
                             return edge;
                         }
                     };
-                    Iterable<Edge> iterable = () -> iterator;
+                    Iterable<Edge<E>> iterable = () -> iterator;
                     return StreamSupport.stream(iterable.spliterator(), false);
                 }).iterator();
     }
 
-    @MethodNote("从边创建图（有向图），顶点和图都没有属性")
-    public static Graph<Void> newListGraph(String[] edgeStr) {
-        Map<Long, EdgeList> edges = new HashMap<>();
+    @Override
+    public Iterator<Edge<E>> getEdges(long vertexId) {
+        return new Iterator<Edge<E>>() {
+            private EdgeList<E> current = edges.get(vertexId);
+
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public Edge<E> next() {
+                Edge<E> edge = current.info;
+                current = current.next;
+                return edge;
+            }
+        };
+    }
+
+    @MethodNote("从边创建图（有向图），顶点和边都没有属性")
+    public static Graph<Void, Void> newDirectedListGraph(String[] edgeStr) {
+        Map<Long, EdgeList<Void>> edges = new HashMap<>();
         Map<Long, Vertex<Void>> vertexes = new HashMap<>();
         for (String s : edgeStr) {
             String[] part = s.split(" ");
@@ -85,14 +104,45 @@ public class ListGraph<T> implements Graph<T> {
             long to = Long.parseLong(part[1]);
 
             vertexes.put(from, new Vertex<>(from, null));
-            EdgeList fromEdge = edges.get(from);
+            EdgeList<Void> fromEdge = edges.get(from);
             if (fromEdge == null) {
-                edges.put(from, new EdgeList(new Edge(from, to), null));
+                edges.put(from, new EdgeList<>(new Edge<>(from, to), null));
             } else {
-                fromEdge.next = new EdgeList(new Edge(from, to), fromEdge.next);
+                fromEdge.next = new EdgeList<>(new Edge<>(from, to), fromEdge.next);
             }
 
             vertexes.put(to, new Vertex<>(to, null));
+        }
+        return new ListGraph<>(edges, vertexes);
+    }
+
+    @MethodNote("从边创建图（无向图），顶点没有属性，边有长度属性")
+    public static Graph<Void, Integer> newUnDirectedGraphWithEdgeValue(String[] edgeStr) {
+        Map<Long, EdgeList<Integer>> edges = new HashMap<>();
+        Map<Long, Vertex<Void>> vertexes = new HashMap<>();
+        for (String s : edgeStr) {
+            String[] part = s.split(" ");
+            long from = Long.parseLong(part[0]);
+            long to = Long.parseLong(part[1]);
+            int edgeValue = Integer.parseInt(part[2]);
+
+            vertexes.putIfAbsent(from, new Vertex<>(from, null));
+            vertexes.putIfAbsent(to, new Vertex<>(to, null));
+
+            EdgeList<Integer> fromEdge = edges.get(from);
+            if (fromEdge == null) {
+                edges.put(from, new EdgeList<>(new Edge<>(from, to, edgeValue), null));
+            } else {
+                fromEdge.next = new EdgeList<>(new Edge<>(from, to, edgeValue), fromEdge.next);
+            }
+
+            EdgeList<Integer> toEdge = edges.get(to);
+            if (toEdge == null) {
+                edges.put(to, new EdgeList<>(new Edge<>(to, from, edgeValue), null));
+            } else {
+                toEdge.next = new EdgeList<>(new Edge<>(to, from, edgeValue), toEdge.next);
+            }
+
         }
         return new ListGraph<>(edges, vertexes);
     }
@@ -103,9 +153,13 @@ public class ListGraph<T> implements Graph<T> {
 
         for (Vertex<T> v : vertexes.values()) {
             sb.append(v.getId()).append(":").append(v.getValue()).append(",");
-            EdgeList head = edges.get(v.getId());
+            EdgeList<E> head = edges.get(v.getId());
             while (head != null) {
-                sb.append("->").append(head.info.getTo()).append(";");
+                sb.append("->").append(head.info.getTo());
+                if (head.info.getValue() != null) {
+                    sb.append("(").append(head.info.getValue()).append(")");
+                }
+                sb.append(";");
                 head = head.next;
             }
             sb.append("\n");
@@ -113,13 +167,13 @@ public class ListGraph<T> implements Graph<T> {
         return sb.toString();
     }
 
-    public static class EdgeList {
+    public static class EdgeList<E> {
         // 边的信息
-        public Edge info;
+        public Edge<E> info;
         // from 顶点的边信息
-        public EdgeList next;
+        public EdgeList<E> next;
 
-        public EdgeList(Edge i, EdgeList n) {
+        public EdgeList(Edge<E> i, EdgeList<E> n) {
             info = i;
             next = n;
         }

@@ -1,7 +1,7 @@
 package org.xliu.cs.algs_ds.ds.index;
 
 import org.junit.jupiter.api.Test;
-import org.xliu.cs.algs_ds.ds.index.BloomFilter;
+import org.xliu.cs.algs_ds.algs.index.BloomFilter;
 
 import java.io.IOException;
 

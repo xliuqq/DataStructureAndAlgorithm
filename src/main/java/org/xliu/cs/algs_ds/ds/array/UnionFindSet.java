@@ -8,7 +8,7 @@ import java.util.Arrays;
  * 并查集用于快速判断两个元素是否在一个集合中。
  */
 @ClassNote("并查集")
-public class UnionSet {
+public class UnionFindSet {
     /**
      * 元素，下标为元素索引，值分为两种情况：
      * 1）值 >= 0，表示其直接父节点索引；
@@ -17,7 +17,7 @@ public class UnionSet {
      */
     private final int[] ids;
 
-    public UnionSet(int size) {
+    public UnionFindSet(int size) {
         ids = new int[size];
         Arrays.fill(ids, -1); // use -1 to represent its parent is itself
     }

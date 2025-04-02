@@ -7,11 +7,10 @@ import org.xliu.cs.projects.anno_for_doc.annotations.ClassNote;
 import org.xliu.cs.projects.anno_for_doc.annotations.MethodNote;
 
 import java.util.*;
-import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@ClassNote("图操作类")
+@ClassNote("图遍历顺序算法")
 public class GraphOp<T> {
     private enum VisitState {
         NOT_VISIT, // 顶点未被发现
@@ -19,9 +18,9 @@ public class GraphOp<T> {
         VISITED;   // 被发现且被处理完
     }
 
-    private final Graph<T> graph;
+    private final Graph<T, Void> graph;
 
-    public GraphOp(Graph<T> graph) {
+    public GraphOp(Graph<T, Void> graph) {
         this.graph = graph;
     }
 
@@ -34,12 +33,7 @@ public class GraphOp<T> {
 
     @MethodNote("有向图广度遍历")
     public void bfs(Function<Vertex<T>, Void> vertexConsumer) {
-        Map<Long, Integer> vertexInDegree = getVertexInDegree();
-        Set<Long> zeroInDegree = vertexInDegree.entrySet().stream()
-                .filter(v -> v.getValue() == 0)
-                .map(Map.Entry::getKey)
-                .collect(TreeSet::new, Set::add, Set::addAll);
-
+        Set<Long> zeroInDegree = getZeroDegreeIds();
 
         // 对于有向图，两个入度为0的顶点，可能会有公共的子节点，所以要用全局的状态
         // 对于无向图，两个入度为0的顶点，一定不会有公共子节点（不然可以沿着到达），因此可以不用全局的状态，调用 bfs(vId, vertexConsumer)
@@ -49,20 +43,19 @@ public class GraphOp<T> {
         }
     }
 
-    public void bfsInternal(long startVertexId, Map<Long, VisitState> visitStates, Function<Vertex<T>, Void> consumer) {
+    private void bfsInternal(long startVertexId, Map<Long, VisitState> visitStates, Function<Vertex<T>, Void> consumer) {
         Queue<Long> pending = new ArrayDeque<>();
-
-        visitStates.put(startVertexId, VisitState.VISITING);
         pending.offer(startVertexId);
 
         while (!pending.isEmpty()) {
             long v = pending.poll();
+            // first visit hook.
+            visitStates.put(v, VisitState.VISITING);
             Vertex<T>[] neighbours = graph.getNeighbours(v);
 
             for (Vertex<T> w : neighbours) {
-                long id = w.getId();
-                if (visitStates.get(id) == null) {
-                    visitStates.put(id, VisitState.VISITING);
+                long wid = w.getId();
+                if (visitStates.get(wid) == null) {
                     pending.offer(w.getId());
                     //Process tree edge v -> w
                 }
@@ -70,6 +63,7 @@ public class GraphOp<T> {
             //Process vertex v here
             consumer.apply(graph.getVertex(v));
 
+            // second visit hook.
             visitStates.put(v, VisitState.VISITED);
         }
     }
@@ -90,11 +84,7 @@ public class GraphOp<T> {
 
     @MethodNote("有向图深度遍历")
     public void dfs(Function<Vertex<T>, Void> vertexConsumer) {
-        Map<Long, Integer> vertexInDegree = getVertexInDegree();
-        Set<Long> zeroInDegree = vertexInDegree.entrySet().stream()
-                .filter(v -> v.getValue() == 0)
-                .map(Map.Entry::getKey)
-                .collect(TreeSet::new, Set::add, Set::addAll);
+        Set<Long> zeroInDegree = getZeroDegreeIds();
 
         // 对于有向图，两个入度为0的顶点，可能会有公共的子节点，所以要用全局的状态
         // 对于无向图，两个入度为0的顶点，一定不会有公共子节点（不然可以沿着到达），因此可以不用全局的状态，调用 dfs(vId, vertexConsumer)
@@ -104,7 +94,16 @@ public class GraphOp<T> {
         }
     }
 
+    private Set<Long> getZeroDegreeIds() {
+        Map<Long, Integer> vertexInDegree = getVertexInDegree();
+        return vertexInDegree.entrySet().stream()
+                .filter(v -> v.getValue() == 0)
+                .map(Map.Entry::getKey)
+                .collect(TreeSet::new, Set::add, Set::addAll);
+    }
+
     public void dfsInternal(long vId, Map<Long, VisitState> visitStates, Function<Vertex<T>, Void> vertexConsumer) {
+        // first visit hook.
         visitStates.put(vId, VisitState.VISITING);
         // Preorder processing of vertex v
         Vertex<T>[] neighbours = graph.getNeighbours(vId);
@@ -115,14 +114,15 @@ public class GraphOp<T> {
                 // Exploratory processing for tree edge vw;
                 dfsInternal(w.getId(), visitStates, vertexConsumer);
                 // Backtrack processing for tree edge vw, using wAns(like inorder)
-            } else {
-                // Checking(i.e., processing) for nontree edge vw
-                // if state == VISITING, the graph has a ring.
             }
+            // else
+            // Checking(i.e., processing) for nontree edge vw
+            // if state == VISITING, the graph has a ring.
         }
-        visitStates.put(vId, VisitState.VISITED);
         // Postorder processing of vertex v
         vertexConsumer.apply(graph.getVertex(vId));
+        // seconds visit hook.
+        visitStates.put(vId, VisitState.VISITED);
     }
 
 
@@ -182,10 +182,10 @@ public class GraphOp<T> {
             vertexInDegree.put(vertexes.next().getId(), 0);
         }
 
-        Iterator<Edge> edges = graph.getEdges();
+        Iterator<Edge<Void>> edges = graph.getEdges();
 
         while (edges.hasNext()) {
-            Edge edge = edges.next();
+            Edge<Void> edge = edges.next();
             // 点都应该已存在
             vertexInDegree.computeIfPresent(edge.getTo(), (k, v) -> v + 1);
         }

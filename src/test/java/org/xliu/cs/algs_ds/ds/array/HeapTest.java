@@ -2,7 +2,6 @@ package org.xliu.cs.algs_ds.ds.array;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.xliu.cs.algs_ds.ds.array.Heap;
 
 import java.util.ArrayList;
 import java.util.List;

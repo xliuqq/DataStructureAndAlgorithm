@@ -1,6 +1,6 @@
 package org.xliu.cs.algs_ds.leetcode.graph;
 
-import org.xliu.cs.algs_ds.ds.array.UnionFindSet;
+import org.xliu.cs.algs_ds.ds.array.UnionSet;
 import org.xliu.cs.projects.anno_for_doc.annotations.ClassNote;
 
 
@@ -24,24 +24,24 @@ public class WordHeadTail {
      * 判断是否能够构成单词排列通路
      */
     public static boolean isCycleForm(String[] words) {
-        UnionFindSet unionFindSet = new UnionFindSet(26); // 26个字母的并查集
+        UnionSet unionSet = new UnionSet(26); // 26个字母的并查集
         int[] inNums = new int[26];
         int[] outNums = new int[26];
 
         for (String word : words) {
             int a = word.charAt(0) - 'a';
             int b = word.charAt(word.length() - 1) - 'a';
-            int pa = unionFindSet.find(a);
-            int pb = unionFindSet.find(b);
+            int pa = unionSet.find(a);
+            int pb = unionSet.find(b);
             if (pa != pb) {
-                unionFindSet.union(pa, pb);
+                unionSet.union(pa, pb);
             }
             inNums[b]++;  // 入度加1
             outNums[a]++; // 出度加1
         }
 
         // 多个集合，不能形成通路
-        int setSizes = unionFindSet.countSet();
+        int setSizes = unionSet.countSet();
         int notShownLetters = 26;
         for (int i = 0; i < 26; i++) {
             if (inNums[i] > 0 || outNums[i] > 0) {

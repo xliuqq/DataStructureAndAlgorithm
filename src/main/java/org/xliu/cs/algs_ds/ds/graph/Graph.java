@@ -8,7 +8,7 @@ import java.util.Iterator;
  * 假设顶点类型是 int（从 0 -> n）
  */
 @ClassNote("图抽象类")
-public interface Graph<T> {
+public interface Graph<T, E> {
 
     /**
      * 获取 v 的邻接点（对于有向图，获取的是其指向的节点）
@@ -32,7 +32,11 @@ public interface Graph<T> {
     /**
      * 获取所有的边
      */
-    Iterator<Edge> getEdges();
+    Iterator<Edge<E>> getEdges();
 
+    /**
+     * 获取某个顶点的边
+     */
+    Iterator<Edge<E>> getEdges(long vertexId);
 
 }

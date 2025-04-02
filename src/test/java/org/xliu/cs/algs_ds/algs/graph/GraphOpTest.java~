@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.xliu.cs.algs_ds.ds.graph.Graph;
 import org.xliu.cs.algs_ds.ds.graph.ListGraph;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +15,7 @@ class GraphOpTest {
     void bfs() {
 
         String[] edgeStr = "0 1;1 2;2 3;4 5;1 4".split(";");
-        Graph<Void, Void> graph = ListGraph.newDirectedListGraph(edgeStr);
+        Graph<Void, Void> graph = ListGraph.newListGraph(edgeStr);
 
         GraphOp<Void> op = new GraphOp<>(graph);
 
@@ -32,7 +33,7 @@ class GraphOpTest {
         //4:null,->5;
         //5:null,
         String[] edgeStr = "0 1;1 2;2 3;4 5;1 4;6 7".split(";");
-        Graph<Void, Void> graph = ListGraph.newDirectedListGraph(edgeStr);
+        Graph<Void, Void> graph = ListGraph.newListGraph(edgeStr);
 
         GraphOp<Void> op = new GraphOp<>(graph);
 
@@ -57,33 +58,33 @@ class GraphOpTest {
     @Test
     void topologyByKahn() {
         String[] edgeStr = "0 1;1 2;2 3;4 5;3 2;5 0".split(";");
-        Graph<Void, Void> graph = ListGraph.newDirectedListGraph(edgeStr);
+        Graph<Void, Void> graph = ListGraph.newListGraph(edgeStr);
 
         GraphOp<Void> op = new GraphOp<>(graph);
 
         ArrayList<Long> orders = new ArrayList<>();
 
-        assertTrue(op.topologyByKahn(orders));
+        assertEquals(true, op.topologyByKahn(orders));
     }
 
 
     @Test
     void topologyByKahnWithoutRing() {
         String[] edgeStr = "0 1;1 2;2 3;4 5;1 4;6 7".split(";");
-        Graph<Void, Void> graph = ListGraph.newDirectedListGraph(edgeStr);
+        Graph<Void, Void> graph = ListGraph.newListGraph(edgeStr);
 
         GraphOp<Void> op = new GraphOp<>(graph);
 
         ArrayList<Long> orders = new ArrayList<>();
 
-        assertFalse(op.topologyByKahn(orders));
+        assertEquals(false, op.topologyByKahn(orders));
     }
 
 
     @Test
     void topologyByDfsWithoutRing() {
         String[] edgeStr = "0 1;1 2;2 3;4 5;1 4;6 7".split(";");
-        Graph<Void, Void> graph = ListGraph.newDirectedListGraph(edgeStr);
+        Graph<Void, Void> graph = ListGraph.newListGraph(edgeStr);
 
         GraphOp<Void> op = new GraphOp<>(graph);
 
@@ -100,7 +101,7 @@ class GraphOpTest {
     void topologyByDFS() {
         // 4 -> 5 -> 0 -> 1 -> 2 ->3 -> 2
         String[] edgeStr = "0 1;1 2;2 3;4 5;3 2;5 0".split(";");
-        Graph<Void, Void> graph = ListGraph.newDirectedListGraph(edgeStr);
+        Graph<Void, Void> graph = ListGraph.newListGraph(edgeStr);
 
         GraphOp<Void> op = new GraphOp<>(graph);
 
